@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.conf import settings
 
 from basic.blog.models import *
-from basic.tools.constants import STOP_WORDS_RE
+from basic.tools.constants import STOP_WORDS
 from tagging.models import Tag, TaggedItem
 
 
@@ -163,7 +163,7 @@ def search(request, template_name='blog/post_search.html'):
     """
     context = {}
     if request.GET:
-        stop_word_list = re.compile(STOP_WORDS_RE, re.IGNORECASE)
+        stop_word_list = re.compile(STOP_WORDS, re.IGNORECASE)
         search_term = '%s' % request.GET['q']
         cleaned_search_term = stop_word_list.sub('', search_term)
         cleaned_search_term = cleaned_search_term.strip()
